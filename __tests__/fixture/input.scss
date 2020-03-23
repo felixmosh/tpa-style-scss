@@ -1,0 +1,138 @@
+@import "../../syntax";
+
+.second-styles {
+  border-width: unit(--borderWidth, px);
+  color: red;
+}
+
+.colors-from-settings {
+  color: color(--color_from_settings);
+}
+
+.fonts-from-settings {
+  font: font(--fontFromSettings);
+}
+
+.font-string-hack {
+  width: string(--stringHack);
+}
+
+.string-default-value {
+  --stringDefaultValue: "#{string(0px)}";
+  width: string(--stringDefaultValue);
+}
+
+:root {
+  --default_vals: color(color-4);
+}
+
+.default-values {
+  color: color(--default_vals);
+}
+
+:root {
+  --cart_textFontStyle: "#{font(Body-M)}";
+  --cartButton_textColor: "#{color(color-1)}";
+}
+
+.no-semicolon {
+  font: font(--cart_textFontStyle);
+  color: color(--cartButton_textColor);
+}
+
+.font-test {
+  font: font(Body-M);
+}
+
+.font-test2 {
+  --some-font: "#{font(Body-M)}";
+  font: font(--some-font);
+}
+
+.font-test3::after {
+  content: " ";
+  font: font($theme: Body-M, $size: 16px, $style: italic);
+}
+
+.font-test4 {
+  --var: "#{color(color-2)}";
+  color: join(opacity(color(color-1), 0.5), 1, opacity(--var, 0.5), 1);
+}
+
+.opacity-default-value {
+  rule1: opacity(--lala, 0.5);
+  --lala: "#{color(color-9)}";
+}
+
+.color-transformation {
+  rule4: color(color-1);
+  rule5: color(color(color(color-2)));
+}
+
+.darken-transformation {
+  rule1: darken(color(color-9), 0.5);
+}
+
+.without-opacity {
+  rule1: withoutOpacity(opacity(color(color-9), 0.1));
+}
+
+.opacity-with-var {
+  rule1: opacity(--opacityWithVar, 0.5);
+}
+
+.join-colors {
+  rule1: join(--joinColor, 1, color(color-10), 1);
+}
+
+.numbers {
+  width: calc(100% - "#{number(--numberVar)}");
+}
+
+.unit-with-value-zero {
+  border: unit(--unitZero, px) solid color(--unit_zero_color);
+}
+
+.font-theme-override {
+  font: font($theme: Body-M, $size: 10px, $lineHeight: 2em, $weight: bold, $style: italic);
+
+}
+
+.first-none-falsy {
+  --first_none_falsy: "#{color(red)}";
+  color: fallback(color(--first_none_falsy), color(color-1))
+}
+
+.fallback-multiple-vals {
+  color: fallback(--multi_val1, --multi_val2, color(color-1));
+}
+
+.number-zero-none-falsy {
+  --zero_none_falsy: "#{zeroAsTrue(0)}";
+  width: unit(fallback(--zero_none_falsy, 1), px);
+}
+
+.undefined-falsy {
+  width: unit(fallback(zeroAsTrue(--undefined_falsy), 1), px);
+}
+
+.return-zero {
+  border-width: zeroAsTrue(0);
+}
+
+.return-undefined {
+  border-width: zeroAsTrue(--undefined_val);
+}
+
+.whiten {
+  rule1: whiten(#663898, 0.25);
+}
+
+.lighten {
+  rule1: lighten(color(color-10), 0.15);
+}
+
+.nested-functions-with-multiple-functions-params {
+  --var: color(color-2);
+  color: fallback(join(opacity(color(color-1), 0.5), 1, opacity(--var, 0.5), 1), color(color-8))
+}

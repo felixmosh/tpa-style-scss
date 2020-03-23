@@ -1,0 +1,19 @@
+{
+  "name": "tpa-style-scss",
+  "version": "1.0.0",
+  "description": "Set of SCSS functions that help you to build TPA style custom syntax.",
+  "main": "syntax.scss",
+  "files": [
+    "syntax.scss"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Felix Mosheev",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "node-sass": "^4.13.1"
+  }
+}

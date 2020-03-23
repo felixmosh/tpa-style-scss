@@ -1,0 +1,101 @@
+@function join-list($list, $separator: ', ') {
+  $ret: '';
+  @each $item in $list {
+    $ret: $ret + $item + $separator;
+  }
+
+  @return str-slice($ret, 0, -3);
+}
+
+@function to-json-like($map) {
+  $ret: '';
+
+  @each $key, $value in $map {
+    $ret: $ret + "#{$key}: '#{$value}', ";
+  }
+
+  @return '{' + str-slice($ret, 0, -3) + '}';
+}
+
+@function invoke($func-name, $args) {
+  $args-as-str: join-list($args);
+
+  @return '#{$func-name}(#{unquote($args-as-str)})';
+}
+
+@function font($theme, $size: null, $lineHeight: null, $weight: null, $style: null) {
+  $args: $theme;
+
+  @if ($size != null or $lineHeight != null or $weight != null or $style != null) {
+    $args: (theme: $theme);
+
+    @if ($size != null) {
+      $args: map-merge($args, (size: $size));
+    }
+
+    @if ($lineHeight != null) {
+      $args: map-merge($args, (lineHeight: $lineHeight));
+    }
+
+    @if ($weight != null) {
+      $args: map-merge($args, (weight: $weight));
+    }
+
+    @if ($style != null) {
+      $args: map-merge($args, (style: $style));
+    }
+
+
+    $args: to-json-like($args);
+  }
+
+  @return invoke('font', $args);
+}
+
+@function color($color) {
+  @return invoke('color', ($color));
+}
+
+@function opacity($color, $amount) {
+  @return invoke('opacity', ($color, $amount));
+}
+
+@function withoutOpacity($param) {
+  @return invoke('withoutOpacity', ($param));
+}
+
+@function unit($param, $unit) {
+  @return invoke('unit', ($param, $unit));
+}
+
+@function lighten($color, $amount) {
+  @return invoke('lighten', ($color, $amount));
+}
+
+@function darken($color, $amount) {
+  @return invoke('darken', ($color, $amount));
+}
+
+@function whiten($color, $amount) {
+  @return invoke('whiten', ($color, $amount));
+}
+
+@function number($param) {
+  @return invoke('number', ($param));
+}
+
+@function zeroAsTrue($param) {
+  @return invoke('zeroAsTrue', ($param));
+}
+
+@function string($param) {
+  @return invoke('string', ($param));
+}
+
+@function join($args...) {
+  @return invoke('join', $args);
+}
+
+@function fallback($args...) {
+  @return invoke('fallback', $args);
+}
